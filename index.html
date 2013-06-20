@@ -6,7 +6,7 @@
 	<!-- Import Google Font - Yanone Kaffeesatz  -->	
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 
-    <meta property="og:image" content="http://sig.test.flyapps.me/og.png" />
+    <meta property="og:image" content="http://sig.flyapps.me/og.png" />
  
 	<title>Everything.me Signature Generator</title> 
 	
@@ -169,16 +169,20 @@
 					
 						<label for="phone">* Phone:</label> 
 						<input type="text" name="phone" id="frm-phone" value="" placeholder="e.g (972) 54-3164060" /> 
-					</div>		
-					
-					<div class="col">
-															
-						<label for="email">* Email:</label> 
-						<input type="email" name="email" id="frm-email" value=""  /> 
-						
+
+          </div>    
+          
+          <div class="col">
+
+            <label for="email">* Email:</label> 
+            <input type="email" name="email" id="frm-email" value=""  /> 
+
+            <label for="skype">Skype Username:</label> 
+            <input type="text" name="skype" id="frm-sn-skype" value="" />                   
+						<!-- 
 						<label for="facebook">Facebook Profile Name:</label> 
 						<input type="text" name="facebook" id="frm-sn-facebook" value="" /> 
-				
+				     -->
 						<label for="twitter">Twitter Username:</label> 
 						<input type="text" name="twitter" id="frm-sn-twitter" value=""  />
 					</div>
@@ -228,6 +232,7 @@
                                 </tr>
                                 <tr>
                                     {facebook}
+                                    {skype}
                                     {twitter}
                                 </tr>
                             </table>
@@ -243,18 +248,25 @@
 		</script>
 		
 		<script type="text/html" id="sn-facebook-tpl">
-            <td style="padding-top: 2px;">
-                <a href="http://facebook.com/{username}"><img style="border:0; vertical-align: middle" width="16" height="15" src="http://corp.everything.me/img/mail-signature/Icon_FB.gif" /></a>
-                <a href="http://facebook.com/{username}" style="font-size:12px;color: #434343; text-decoration: none; padding-left:3px; padding-right: 14px">{username}</a>
-            </td>
-        </script>
-				
-		<script type="text/html" id="sn-twitter-tpl">
-            <td style="padding-top: 2px;">
-                <a href="http://twitter.com/{username}"><img style="border:0; vertical-align: middle" width="16" height="15" src="http://corp.everything.me/img/mail-signature/Icon_Twitter.gif" /></a>
-                <a href="http://twitter.com/{username}" style="font-size:12px;color: #434343; text-decoration: none;padding-left:3px">@{username}</a>
-            </td>
-        </script>
+        <td style="padding-top: 2px;">
+            <a href="http://facebook.com/{username}"><img style="border:0; vertical-align: middle" width="16" height="15" src="http://corp.everything.me/img/mail-signature/Icon_FB.gif" /></a>
+            <a href="http://facebook.com/{username}" style="font-size:12px;color: #434343; text-decoration: none; padding-left:3px; padding-right: 14px">{username}</a>
+        </td>
+    </script>
+    
+    <script type="text/html" id="sn-twitter-tpl">
+        <td style="padding-top: 2px;">
+            <a href="http://twitter.com/{username}"><img style="border:0; vertical-align: middle" width="16" height="15" src="http://corp.everything.me/img/mail-signature/Icon_Twitter.gif" /></a>
+            <a href="http://twitter.com/{username}" style="font-size:12px;color: #434343; text-decoration: none;padding-left:3px">@{username}</a>
+        </td>
+    </script>
+
+    <script type="text/html" id="sn-skype-tpl">
+        <td style="padding-top: 2px;">
+            <a href="skyp:{username}?userinfo"><img style="border:0; vertical-align: middle" width="16" height="15" src="http://corp.everything.me/img/mail-signature/Icon_Skype.png" /></a>
+            <a href="skyp:{username}?userinfo" style="font-size:12px;color: #434343; text-decoration: none; padding-left:3px; padding-right: 14px">{username}</a>
+        </td>
+    </script>
  	</div>	
  	
  	<script>
@@ -283,13 +295,15 @@
  				$frmPhone = $('frm-phone'),
  				$frmEmail = $('frm-email'),
  				
- 				$frmSNFacebook = $('frm-sn-facebook'),
- 				$frmSNTwitter = $('frm-sn-twitter'),
+ 				// $frmSNFacebook = $('frm-sn-facebook'),
+        $frmSNTwitter = $('frm-sn-twitter'),
+ 				$frmSNSkype = $('frm-sn-skype'),
 				
 				$frmCode = $('frm-code'),				 			
  				$signatureTemplate = $('signature-tpl').innerHTML,
- 				$facebookTemplate = $('sn-facebook-tpl').innerHTML,
- 				$twitterTemplate = $('sn-twitter-tpl').innerHTML,
+ 				// $facebookTemplate = $('sn-facebook-tpl').innerHTML,
+        $twitterTemplate = $('sn-twitter-tpl').innerHTML,
+ 				$skypeTemplate = $('sn-skype-tpl').innerHTML,
  				
  				$generator = $('generator'), 
  				
@@ -328,18 +342,24 @@
  				template = template.replace('{phone}',$frmPhone.value);
  				template = template.replace(/{email}/g,$frmEmail.value); 				
  				
- 				if ($frmSNFacebook.value != '') { 					
- 					template = template.replace('{facebook}',$facebookTemplate.replace(/{username}/g,$frmSNFacebook.value)); 					
- 				} else {
+ 				// if ($frmSNFacebook.value != '') { 					
+ 					// template = template.replace('{facebook}',$facebookTemplate.replace(/{username}/g,$frmSNFacebook.value)); 					
+ 				// } else {
  					template = template.replace('{facebook}','');	
- 				}
- 				
-				if ($frmSNTwitter.value != '') { 					
- 					template = template.replace('{twitter}',$twitterTemplate.replace(/{username}/g,$frmSNTwitter.value)); 					
- 				} else {
- 					template = template.replace('{twitter}','');	
- 				}	 					
- 				
+ 				// }
+
+        if ($frmSNTwitter.value != '') {          
+          template = template.replace('{twitter}',$twitterTemplate.replace(/{username}/g,$frmSNTwitter.value));           
+        } else {
+          template = template.replace('{twitter}','');  
+        }           
+        
+        if ($frmSNSkype.value != '') {           
+          template = template.replace('{skype}',$skypeTemplate.replace(/{username}/g,$frmSNSkype.value));          
+        } else {
+          template = template.replace('{skype}',''); 
+        }
+
  				template = template.replace(/\s{2,}/g,'');
  				$frmCode.value = '<!-- everything.me signature code -->' + "\n" + template; 	
  				
