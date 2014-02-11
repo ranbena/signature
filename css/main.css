@@ -1,0 +1,245 @@
+@font-face {
+  font-family: 'AktivGroteskCorp';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Aktiv Grotesk Corp Light'), url(/fonts/AktivGrotesk_Corp_Lt.woff) format('woff');
+}
+@font-face {
+  font-family: 'AktivGroteskCorp';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Aktiv Grotesk Corp'), url(/fonts/AktivGrotesk_Corp_Rg.woff) format('woff');
+}
+@font-face {
+  font-family: 'AktivGroteskCorp';
+  font-style: normal;
+  font-weight: 500;
+  src: local('Aktiv Grotesk Corp Medium'), url(/fonts/AktivGrotesk_Corp_Md.woff) format('woff');
+}
+@font-face {
+  font-family: 'AktivGroteskCorp';
+  font-style: normal;
+  font-weight: 600;
+  src: local('Aktiv Grotesk Corp Bold'), url(/fonts/AktivGrotesk_Corp_Bd.woff) format('woff');
+}
+
+* {
+  margin: 0px;
+  padding: 0px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html, body {
+  background: #f6f6f6;
+}
+
+body {
+  margin: 0;
+  padding: 0 0 20px 0;
+  font: 300 15px 'AktivGroteskCorp', 'Helvetica Neue', 'Helvetica', sans-serif;
+  color: #0a1116;
+}
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 230px;
+  background: #201617 url('/img/bg.jpg') 50% 50% no-repeat;
+  background-size: cover;
+}
+body::before, header {
+  height: 250px;
+}
+
+#wrapper {
+  width: 960px;
+  margin: 0 auto;
+  position: relative;
+}
+
+h1 a {
+  display: block;
+  height: 74px;
+  width: 265px;
+  margin: 20px 0;
+  background: transparent url('/img/logo.png') 0 0 no-repeat;
+  background-size: contain;
+}
+h2 {
+  color: #fff;
+  margin: 40px 0 20px 0;
+  font-weight: 300;
+  font-size: 32px;
+}
+h3 {
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+
+fieldset {
+  border: none;
+}
+fieldset[role="main"] {
+  border-bottom: 1px solid #d0d0d0;
+  margin-bottom: 20px;
+}
+
+.field {
+  position: relative;
+  width: 304px;
+  float: left;
+  clear: none;
+  padding: 0;
+  margin: 0 50px 40px 0;
+}
+
+label {
+  display: block;
+  margin-bottom: 3px;
+  line-height: 1.5;
+}
+
+input, textarea {
+  font-family: 'AktivGroteskCorp', 'Helvetica Neue', 'Helvetica', sans-serif;
+  font-weight: 300;
+  font-size: 18px;
+  width: 100%;
+  padding: 4px 6px;
+  background: #fff;
+  border: 1px solid #273036;
+  border-radius: 3px;
+}
+textarea {
+  height: 250px;
+  resize: none;
+}
+select {
+  font-family: 'AktivGroteskCorp', 'Helvetica Neue', 'Helvetica', sans-serif;
+  font-weight: 300;
+  font-size: 18px;
+  width: 100%;
+  padding: 4px 6px;
+  background: #fff;
+  border: 1px solid #273036;
+  border-radius: 3px;
+}
+
+div[contenteditable] {
+  padding: 4px 6px;
+  background: #fff;
+  background: #fff;
+  border: 1px solid #273036;
+  border-radius: 3px;
+  margin-bottom: 40px;
+}
+
+input.submit {
+  width: 150px;
+  padding: 10px;
+  color: #ffffff;
+  text-transform: uppercase;
+  border: 0;
+  border-radius: 30px;
+  background: #e3682c;
+  cursor: pointer;
+}
+input.submit:hover {
+  background: #ff6804;
+}
+input.submit:focus {
+  outline: none;
+}
+
+button.remove {
+  position: absolute;
+  top: 0;
+  left: -20px;
+  border: 0;
+  outline: 0;
+  background: none;
+  cursor: pointer;
+}
+button.remove:focus {
+  outline: none;
+}
+
+#drop-zone {
+  float: left;
+  width: 110px;
+  height: 110px;
+  border: 2px dotted #bbb;
+  border-radius: 3px;
+  padding-top: 37px;
+  margin-right: 20px;
+  text-align: center;
+  font-weight: 300;
+  color: #bbb;
+  text-transform: uppercase;
+  background-color: transparent;
+}
+#drop-zone.drag-over {
+  background-color: #fff;
+}
+#frm-logo {
+  display: none;
+}
+canvas#frm-canvas {
+  width: 110px;
+  height: 110px;
+  float: left;
+}
+#frm-clearCanvas {
+  position: static;
+  width: 110px;
+  margin: 10px 0 0 130px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #e3682c;
+  background: #ffffff;
+  border: 1px solid #e3682c;
+  border-radius: 30px;
+  padding: 8px 0;
+  font-size: 10px;
+  cursor: pointer;
+}
+#frm-clearCanvas:hover {
+  background: #f6f6f6;
+}
+
+/*
+ * Clearfix: contain floats
+ *
+ * For modern browsers
+ * 1. The space content is one way to avoid an Opera bug when the
+ *    `contenteditable` attribute is included anywhere else in the document.
+ *    Otherwise it causes space to appear at the top and bottom of elements
+ *    that receive the `clearfix` class.
+ * 2. The use of `table` rather than `block` is only necessary if using
+ *    `:before` to contain the top-margins of child elements.
+ */
+.clearfix:before,
+.clearfix:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+/*
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+
+.clearfix {
+    *zoom: 1;
+}
+
+.hidden {
+  display: none;
+}
