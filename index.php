@@ -31,7 +31,7 @@
             <label for="phone">Phone: *</label>
             <input type="text" name="phone" id="frm-phone" value="" placeholder="e.g (+972) 54-3164060" />
           </div>
-          <div class="field clearfix hidden">
+          <div class="field clearfix">
             <label for="logo">Logo background image:</label>
             <div id="drop-zone">Drop Image here</div>
             <canvas id="frm-canvas" class="hidden" width="110" height="110"></canvas>

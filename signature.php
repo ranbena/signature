@@ -3,7 +3,7 @@
   <table border="0" cellpadding="0" cellspacing="0" style="width: 100%">
     <tr>
       <td style="width: 55px;" valign="top">
-        <a href="http://everything.me/"><img width="55" height="55" border="0" style="width: 55px; height: 55px;" src="https://s3.amazonaws.com/evme-static-assets/email-signature/default_logo.jpg" /></a>
+        <a href="http://everything.me/"><img width="55" height="55" border="0" style="width: 55px; height: 55px;" src="<?=$img?>" /></a>
       </td>
       <td>
         <div style="padding: 10px 0 0 10px;">
