@@ -27,21 +27,17 @@ var Signature = new function() {
           'name': 'additionalPhone',
           'placeholder': 'e.g (+972) 54-3164060'
         },
-        'facebook': {
-          'label': 'Facebook username',
+        /*'facebook': {
+          'label': 'Facebook',
           'name': 'facebook'
-        },
+        },*/
         'twitter': {
-          'label': 'Twitter username',
+          'label': 'Twitter',
           'name': 'twitter'
         },
         'skype': {
-          'label': 'Skype username',
+          'label': 'Skype',
           'name': 'skype'
-        },
-        'inspiration': {
-          'label': 'Inspirational text',
-          'name': 'inspiration'
         }
       },
 

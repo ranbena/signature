@@ -10,29 +10,29 @@
   <div id="wrapper">
     <header>
       <h1><a href="/"></a></h1>
-      <h2>EverythingMe mail signature generator</h2>
+      <h2>Email Signature Generator</h2>
     </header>
     <div id="form-wrapper">
       <form action="/generate.php" method="post" onsubmit="Signature.generate();return false;">
         <fieldset role="main" class="clearfix">
           <div class="field">
-            <label for="name">Full Name: *</label>
+            <label for="name">Full Name *</label>
             <input type="text" name="name" id="frm-name" value="" />
           </div>
           <div class="field">
-            <label for="title">Job Title: *</label>
+            <label for="title">Job Title *</label>
             <input type="text" name="title" id="frm-title" value="" />
           </div>
           <div class="field">
-            <label for="email">Email: *</label>
+            <label for="email">Email *</label>
             <input type="email" name="email" id="frm-email" value="" />
           </div>
           <div class="field">
-            <label for="phone">Phone: *</label>
+            <label for="phone">Phone *</label>
             <input type="text" name="phone" id="frm-phone" value="" placeholder="e.g (+972) 54-3164060" />
           </div>
           <div class="field clearfix">
-            <label for="logo">Logo background image:</label>
+            <label for="logo">Logo background image</label>
             <div id="drop-zone">Drop Image here</div>
             <canvas id="frm-canvas" class="hidden" width="110" height="110"></canvas>
             <button id="frm-clearCanvas" class="remove hidden">Remove image</button>
@@ -42,7 +42,7 @@
         <fieldset role="additional" class="clearfix">
           <div class="clearfix"></div>
           <div class="field">
-            <label for="addfield">Add field:</label>
+            <label for="addfield">Add Field</label>
             <select name="addfield" id="frm-addfield">
               <option value="">...</option>
             </select>
@@ -55,7 +55,7 @@
 
   <script type="text/html" id="field-tpl"><div class="field">
     <button class="remove" rel="{name}">x</button>
-    <label for="{name}">{label}:</label>
+    <label for="{name}">{label}</label>
     <input type="text" name="{name}" id="frm-{name}" value="" placeholder="{placeholder}" />
   </div></script>
 

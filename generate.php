@@ -25,6 +25,8 @@ if (!empty($_POST['logo'])) {
     $img = $result['ObjectURL'];
   }
 }
+
+$_POST['twitter'] = str_replace('@', '', $_POST['twitter']);
 ?>
 <!doctype html>
 <html>
