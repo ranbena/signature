@@ -43,7 +43,7 @@ var Signature = new function() {
       },
 
       canvasSettings = {
-        'blur': 1,
+        'blur': 3,
         'alpha': null,
         'iterations': 2,
         'width': 110,
