@@ -34,12 +34,12 @@
           </div>
           <div class="field clearfix">
             <input type="file" id="frm-file" class="hide" />
-            <label for="logo">Logo background image</label>
+            <label for="logoBase64">Logo background image</label>
             <div id="drop-zone">Drop Image here</div>
             <canvas id="frm-canvas" class="hidden" width="110" height="110"></canvas>
             <button id="frm-choose">Choose image</button>
             <button id="frm-clearCanvas" class="hide">Remove image</button>
-            <textarea name="logo" id="frm-logo"></textarea>
+            <textarea name="logoBase64" id="frm-logo"></textarea>
           </div>
           <?php if (isset($_REQUEST['biz']) && $_REQUEST['biz'] == 'true'): ?>
           <div class="field">

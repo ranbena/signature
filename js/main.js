@@ -183,7 +183,7 @@ var Signature = new function() {
       .then(function(){
         $frmCanvas.classList.remove('hidden');
         $clearCanvas.classList.remove('hide');
-        $frmLogo.innerHTML = $frmCanvas.toDataURL();
+        $frmLogo.innerHTML = $frmCanvas.toDataURL('image/jpeg');
       });
   }
 
