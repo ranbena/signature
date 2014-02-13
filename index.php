@@ -37,18 +37,10 @@
             <label for="logoBase64">Logo background image</label>
             <div id="drop-zone">Drop Image here</div>
             <canvas id="frm-canvas" class="hidden" width="110" height="110"></canvas>
-            <button id="frm-choose">Choose image</button>
-            <button id="frm-clearCanvas" class="hide">Remove image</button>
+            <button type="button" id="frm-choose">Choose image</button>
+            <button type="button" id="frm-clearCanvas" class="hide">Remove image</button>
             <textarea name="logoBase64" id="frm-logo"></textarea>
           </div>
-          <?php if (isset($_REQUEST['biz']) && $_REQUEST['biz'] == 'true'): ?>
-          <div class="field">
-            <label for="eventText">Event Text</label>
-            <small>For Biz Dev &amp; Management: Invite folks to meet you at the next event you'll be at.</small>
-            <input type="text" name="eventText" id="frm-eventText" value="" />
-            <small>Example: <em>Coming to MWC? Drop me a line to meet up!</em></small>
-          </div>
-          <?php endif; ?>
         </fieldset>
         <fieldset role="additional" class="clearfix">
           <div class="clearfix"></div>

@@ -26,7 +26,7 @@ var Signature = new function() {
           'label': 'Additional Phone',
           'name': 'additionalPhone',
           'placeholder': 'e.g (+972) 54-3164060',
-          'example': 'Phone format example: <em>(+972) 54-3164060</em>'
+          'example': '(+972) 54-3164060'
         },
         /*'facebook': {
           'label': 'Facebook',
@@ -39,6 +39,12 @@ var Signature = new function() {
         'skype': {
           'label': 'Skype',
           'name': 'skype'
+        },
+        'extraText': {
+          'label': 'Additional Text',
+          'name': 'extraText',
+          'description': 'Here you can add an extra line of text to your signature.',
+          'example': 'Coming to MWC? Drop me a line to meet up!'
         }
       },
 
@@ -151,14 +157,22 @@ var Signature = new function() {
       newField.innerHTML = newField.innerHTML.replace(/{placeholder}/g,
           availableFields[$frmAddField.value].placeholder||'');
 
+      var button = $$('button', newField),
+          input = $$('input', newField);
+
       if (availableFields[$frmAddField.value].example) {
         var small = document.createElement('small');
             small.innerHTML = 'Example: <em>' + availableFields[$frmAddField.value].example + '</em>';
         newField.firstChild.appendChild(small);
       }
 
-      var button = $$('button', newField),
-          input = $$('input', newField);
+      if (availableFields[$frmAddField.value].description) {
+        var small = document.createElement('small');
+            small.innerHTML = availableFields[$frmAddField.value].description;
+
+        newField.firstChild.insertBefore(small, input);
+      }
+
       button.addEventListener('click', removeField);
 
       $frmAdditionalFieldset.insertBefore(newField.firstChild,
