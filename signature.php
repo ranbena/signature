@@ -28,10 +28,10 @@
             <span style="white-space: nowrap; margin-right: 8px;"><a href="http://www.twitter.com/<?=$_POST['twitter'];?>" style="color: #737373; text-decoration: none;"><span><img src="https://s3.amazonaws.com/evme-static-assets/email-signature/twitter_icon.png" border="0" valign="middle" width="16" height="18" style="width: 16px; height: 18px; margin-top: -3px; vertical-align: middle;"/></span>&nbsp;<span>@<?=$_POST['twitter'];?></span></a></span>
             <?php endif; ?>
           </div>
-          <?php if (!empty($_POST['inspiration'])): ?>
+          <?php if (!empty($_POST['eventText'])): ?>
           <div style="margin: 15px 0 0 0; padding: 0; font-size: 12px; color: #737373;">
             <div style="width: 128px; height: 1px; background-color: #d0d0d0;"></div>
-            <div style="margin: 12px 0 0 0; padding: 0;"><em><?=$_POST['inspiration'];?></em></div>
+            <div style="margin: 12px 0 0 0; padding: 0;"><em><?=$_POST['eventText'];?></em></div>
           </div>
           <?php endif; ?>
         </div>

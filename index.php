@@ -3,7 +3,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-  <title>EverythingMe Signature Generator</title>
+  <title>EverythingMe Email Signature Generator</title>
   <link rel="stylesheet" href="/css/main.css">
 </head>
 <body>
@@ -13,7 +13,7 @@
       <h2>Email Signature Generator</h2>
     </header>
     <div id="form-wrapper">
-      <form action="/generate.php" method="post" onsubmit="Signature.generate();return false;">
+      <form action="/generate.php" method="post" onsubmit="return Signature.generate();">
         <fieldset role="main" class="clearfix">
           <div class="field">
             <label for="name">Full Name *</label>
@@ -25,19 +25,30 @@
           </div>
           <div class="field">
             <label for="email">Email *</label>
-            <input type="email" name="email" id="frm-email" value="" />
+            <input type="email" name="email" id="frm-email" value="" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" />
           </div>
           <div class="field">
             <label for="phone">Phone *</label>
             <input type="text" name="phone" id="frm-phone" value="" placeholder="e.g (+972) 54-3164060" />
+            <small>Example: <em>(+972) 54-3164060</em></small>
           </div>
           <div class="field clearfix">
+            <input type="file" id="frm-file" class="hide" />
             <label for="logo">Logo background image</label>
             <div id="drop-zone">Drop Image here</div>
             <canvas id="frm-canvas" class="hidden" width="110" height="110"></canvas>
-            <button id="frm-clearCanvas" class="remove hidden">Remove image</button>
+            <button id="frm-choose">Choose image</button>
+            <button id="frm-clearCanvas" class="hide">Remove image</button>
             <textarea name="logo" id="frm-logo"></textarea>
           </div>
+          <?php if (isset($_REQUEST['biz']) && $_REQUEST['biz'] == 'true'): ?>
+          <div class="field">
+            <label for="eventText">Event Text</label>
+            <small>For Biz Dev &amp; Management: Invite folks to meet you at the next event you'll be at.</small>
+            <input type="text" name="eventText" id="frm-eventText" value="" />
+            <small>Example: <em>Coming to MWC? Drop me a line to meet up!</em></small>
+          </div>
+          <?php endif; ?>
         </fieldset>
         <fieldset role="additional" class="clearfix">
           <div class="clearfix"></div>

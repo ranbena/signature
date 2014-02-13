@@ -25,7 +25,8 @@ var Signature = new function() {
         'phone': {
           'label': 'Additional Phone',
           'name': 'additionalPhone',
-          'placeholder': 'e.g (+972) 54-3164060'
+          'placeholder': 'e.g (+972) 54-3164060',
+          'example': 'Phone format example: <em>(+972) 54-3164060</em>'
         },
         /*'facebook': {
           'label': 'Facebook',
@@ -78,6 +79,8 @@ var Signature = new function() {
       $frmAdditionalFieldset = $$('fieldset[role="additional"]'),
 
       $dropZone = $('drop-zone'),
+      $frmChoose = $('frm-choose'),
+      $frmFile = $('frm-file'),
       $frmCanvas = $('frm-canvas'),
       $frmLogo = $('frm-logo'),
       $clearCanvas = $('frm-clearCanvas');
@@ -91,16 +94,47 @@ var Signature = new function() {
           availableFields[field].label + '</option>');
     }
     $frmAddField.innerHTML += options.join('\n');
-    $frmAddField.addEventListener('change', self.addField.bind(self));
+    $frmAddField.addEventListener('change', addField);
 
-    $dropZone.addEventListener('dragover', self.handleDragOver.bind(self));
-    $dropZone.addEventListener('dragleave', self.handleDragLeave.bind(self));
-    $dropZone.addEventListener('drop', self.handleFileSelect.bind(self));
+    $dropZone.addEventListener('dragover', handleDragOver);
+    $dropZone.addEventListener('dragleave', handleDragLeave);
+    $dropZone.addEventListener('drop', handleFileSelect);
 
-    $clearCanvas.addEventListener('click', self.clearCanvas.bind(self));
+    $frmChoose.addEventListener('click', invokeChooseFile);
+    $frmFile.addEventListener('change', handleFileSelect);
+
+    $clearCanvas.addEventListener('click', clearCanvas);
   };
 
-  this.addField = function() {
+  this.generate = function() {
+    if ($frmName.value == "") {
+      $frmName.focus();
+      return false;
+    }
+
+    if ($frmTitle.value == "") {
+      $frmTitle.focus();
+      return false;
+    }
+
+    if ($frmPhone.value == "") {
+      $frmPhone.focus();
+      return false;
+    }
+
+    if ($frmEmail.value == "") {
+      $frmEmail.focus();
+      return false;
+    }
+
+    return true;
+  };
+
+  function invokeChooseFile() {
+    $frmFile.click();
+  }
+
+  function addField() {
     if ($frmAddField.value.length > 0) {
       if (usedFields.indexOf(availableFields[$frmAddField.value].name) > -1) {
         alert('Can\'t use same field more then once');
@@ -117,9 +151,15 @@ var Signature = new function() {
       newField.innerHTML = newField.innerHTML.replace(/{placeholder}/g,
           availableFields[$frmAddField.value].placeholder||'');
 
+      if (availableFields[$frmAddField.value].example) {
+        var small = document.createElement('small');
+            small.innerHTML = 'Example: <em>' + availableFields[$frmAddField.value].example + '</em>';
+        newField.firstChild.appendChild(small);
+      }
+
       var button = $$('button', newField),
           input = $$('input', newField);
-      button.addEventListener('click', self.removeField.bind(self));
+      button.addEventListener('click', removeField);
 
       $frmAdditionalFieldset.insertBefore(newField.firstChild,
           $frmAddField.parentElement.previousElementSibling);
@@ -128,41 +168,47 @@ var Signature = new function() {
 
       $frmAddField.value = '';
     }
-  };
+  }
 
-  this.removeField = function (e) {
+  function removeField(e) {
     delete usedFields[usedFields.indexOf(e.target.getAttribute('rel'))];
     $frmAdditionalFieldset.removeChild(e.target.parentElement);
-  };
+  }
 
-  this.handleFileSelect = function (e) {
+  function handleFileSelect(e) {
     $dropZone.classList.remove('drag-over');
     loadFile(e)
       .then(renderImg)
       .then(renderMask)
       .then(function(){
         $frmCanvas.classList.remove('hidden');
-        $clearCanvas.classList.remove('hidden');
+        $clearCanvas.classList.remove('hide');
         $frmLogo.innerHTML = $frmCanvas.toDataURL();
       });
-  };
+  }
 
-  this.handleDragOver = function (e) {
+  function handleDragOver(e) {
     e.stopPropagation();
     e.preventDefault();
     e.dataTransfer.dropEffect = 'copy'; // Explicitly show this is a copy.
     $dropZone.classList.add('drag-over');
-  };
+  }
 
-  this.handleDragLeave = function (e) {
+  function handleDragLeave(e) {
     e.stopPropagation();
     e.preventDefault();
     $dropZone.classList.remove('drag-over');
-  };
+  }
 
   function loadFile(e) {
     e.stopPropagation();
     e.preventDefault();
+
+    if (e.currentTarget.isEqualNode($frmFile)) {
+      var f = $frmFile.files[0];
+    } else {
+      var f = e.dataTransfer.files[0];
+    }
 
     var p = new Promise(function(resolve, reject){
       var reader = new FileReader();
@@ -171,11 +217,10 @@ var Signature = new function() {
       }
 
       // Read in the image file as a base64 string.
-      var f = e.dataTransfer.files[0];
       reader.readAsDataURL(f);
     });
     return p;
-  };
+  }
 
   function renderImg(base64) {
     var img = new Image();
@@ -199,7 +244,7 @@ var Signature = new function() {
     });
     img.src = base64;
     return p;
-  };
+  }
 
   function renderMask() {
     var imgMask = new Image();
@@ -217,73 +262,14 @@ var Signature = new function() {
       imgMask.src = '/img/iconMask.png';
     });
     return p;
-  };
+  }
 
-  this.clearCanvas = function() {
+  function clearCanvas() {
     $frmCanvas.getContext("2d").clearRect( 0, 0,
         canvasSettings.width, canvasSettings.height );
 
-    $clearCanvas.classList.add('hidden');
+    $clearCanvas.classList.add('hide');
     $frmLogo.innerHTML = '';
-  };
-
-  this.generate = function() {
-    var template = $signatureTemplate;
-
-    if ($frmName.value == "") {
-      $frmName.focus();
-      return;
-    }
-
-    if ($frmTitle.value == "") {
-      $frmTitle.focus();
-      return;
-    }
-
-    if ($frmPhone.value == "") {
-      $frmPhone.focus();
-      return;
-    }
-
-    if ($frmEmail.value == "") {
-      $frmEmail.focus();
-      return;
-    }
-
-    template = template.replace('{name}', $frmName.value);
-    template = template.replace('{title}', $frmTitle.value);
-    template = template.replace('{phone}', $frmPhone.value);
-    template = template.replace(/{email}/g, $frmEmail.value);
-
-    // if ($frmSNFacebook.value != '') {
-    // template = template.replace('{facebook}',$facebookTemplate.replace(/{username}/g,$frmSNFacebook.value));
-    // } else {
-    template = template.replace('{facebook}', '');
-    // }
-
-    if ($frmSNTwitter.value != '') {
-      template = template.replace('{twitter}', $twitterTemplate.replace(/{username}/g, $frmSNTwitter.value));
-    } else {
-      template = template.replace('{twitter}', '');
-    }
-
-    if ($frmSNSkype.value != '') {
-      template = template.replace('{skype}', $skypeTemplate.replace(/{username}/g, $frmSNSkype.value));
-    } else {
-      template = template.replace('{skype}', '');
-    }
-
-    template = template.replace(/\s{2,}/g, '');
-    $frmCode.value = '<!-- everything.me signature code -->' + "\n" + template;
-
-    showPreview(template);
-  };
-
-  function showPreview(html) {
-
-    $previewCode.innerHTML = html;
-    $preview.style.display = 'block';
-    $generator.style.display = 'block';
   }
 }
 
