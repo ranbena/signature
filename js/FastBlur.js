@@ -45,7 +45,6 @@ var shg_table = [0,9,10,10,14,12,14,14,16,15,16,15,16,15,15,17,18,17,12,18,16,17
 
 
 function boxBlurImage( image, canvasID, radius, blurAlphaChannel, iterations, w, h, center ){
-
   var img = image;
   var w = w || img.width;
   var h = h || img.height;
@@ -60,24 +59,25 @@ function boxBlurImage( image, canvasID, radius, blurAlphaChannel, iterations, w,
     var context = canvas.getContext("2d");
     context.clearRect( 0, 0, w, h );
     if (center) {
-      context.drawImage( img, 0, 0, w, h );
+      console.log(img.width, img.height, w, h);
+      context.drawImage( img, (canvas.width-img.width)/2, (canvas.height-img.height)/2, img.width, img.height );
     } else {
-      context.drawImage( img, 0, 0, w, h );
+      context.drawImage( img, 0, 0, img.width, img.height );
     }
 
   if ( isNaN(radius) || radius < 1 ) return;
 
   if ( blurAlphaChannel )
   {
-    boxBlurCanvasRGBA( canvasID, 0, 0, w, h, radius, iterations, center );
+    boxBlurCanvasRGBA( canvasID, 0, 0, w, h, radius, iterations );
   } else {
-    boxBlurCanvasRGB( canvasID, 0, 0, w, h, radius, iterations, center );
+    boxBlurCanvasRGB( canvasID, 0, 0, w, h, radius, iterations );
   }
 
 }
 
 
-function boxBlurCanvasRGBA( id, top_x, top_y, width, height, radius, iterations, center ){
+function boxBlurCanvasRGBA( id, top_x, top_y, width, height, radius, iterations ){
   if ( isNaN(radius) || radius < 1 ) return;
 
   radius |= 0;
@@ -225,7 +225,7 @@ function boxBlurCanvasRGBA( id, top_x, top_y, width, height, radius, iterations,
 
 }
 
-function boxBlurCanvasRGB( id, top_x, top_y, width, height, radius, iterations, center ){
+function boxBlurCanvasRGB( id, top_x, top_y, width, height, radius, iterations ){
   if ( isNaN(radius) || radius < 1 ) return;
 
   radius |= 0;
