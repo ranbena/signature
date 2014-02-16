@@ -29,9 +29,9 @@
             <?php endif; ?>
           </div>
           <?php if (!empty($_POST['extraText'])): ?>
-          <div style="margin: 15px 0 0 0; padding: 0; font-size: 12px; color: #737373;">
+          <div style="margin: 10px 0 0 0; padding: 0; font-size: 12px; color: #737373;">
             <div style="width: 128px; height: 1px; background-color: #d0d0d0;"></div>
-            <div style="margin: 12px 0 0 0; padding: 0;"><em><?=$_POST['extraText'];?></em></div>
+            <div style="margin: 7px 0 0 0; padding: 0;"><em><?=$_POST['extraText'];?></em></div>
           </div>
           <?php endif; ?>
         </div>
