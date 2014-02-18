@@ -64,21 +64,8 @@ var Signature = new function() {
       $frmPhone = $('frm-phone'),
       $frmEmail = $('frm-email'),
 
-      // $frmSNFacebook = $('frm-sn-facebook'),
-      $frmSNTwitter = $('frm-sn-twitter'),
-      $frmSNSkype = $('frm-sn-skype'),
-
       $frmCode = $('frm-code'),
       $fieldTemplate = $('field-tpl').innerHTML,
-      $signatureTemplate = $('signature-tpl').innerHTML,
-      // $facebookTemplate = $('sn-facebook-tpl').innerHTML,
-      $twitterTemplate = $('sn-twitter-tpl').innerHTML,
-      $skypeTemplate = $('sn-skype-tpl').innerHTML,
-
-      $generator = $('generator'),
-
-      $preview = $('preview'),
-      $previewCode = $('preview-code'),
 
       $frmAddField = $('frm-addfield'),
 
