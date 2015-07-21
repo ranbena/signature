@@ -1,7 +1,9 @@
 <?php
-require_once dirname(__FILE__) . "/../common/includes.php";
-require_once dirname(__FILE__) . '/../common/AWS/aws-autoloader.php';
+require_once dirname(__FILE__) . '/AWS/aws-autoloader.php';
 use Aws\S3\S3Client;
+
+define("AWS_KEY", "AKIAJT6OQHODXI76C2BQ");
+define("AWS_SECRET", "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");
 
 // default img for the signature
 $img = 'https://s3.amazonaws.com/evme-static-assets/email-signature/default_logo.jpg';
